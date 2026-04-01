@@ -1,0 +1,42 @@
+# Секреты и ключи (НИКОГДА не выкладывать!)
+credentials.json
+huggingface_token.py
+test_api_token.txt
+*.key
+*.pem
+*.p12
+.env
+.secrets
+
+# Виртуальное окружение
+venv/
+env/
+.venv/
+ENV/
+
+# Python кэш и служебные файлы
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+
+# Логи
+*.log
+loging.txt
+logs/
+
+# Файлы IDE (если используешь)
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS служебные файлы
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Streamlit локальные настройки (если есть секреты)
+.streamlit/secrets.toml
