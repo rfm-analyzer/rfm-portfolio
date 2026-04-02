@@ -2,7 +2,6 @@ streamlit
 pandas
 gspread
 google-auth
-streamlit-gsheets
 plotly
 seaborn
 matplotlib
