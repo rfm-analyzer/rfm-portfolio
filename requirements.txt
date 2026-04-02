@@ -1,8 +1,10 @@
 streamlit
 pandas
-io
 gspread
-google.oauth2.service_account
-streamlit_gsheets
-datetime
-uuid
+google-auth
+streamlit-gsheets
+plotly
+seaborn
+matplotlib
+
+
