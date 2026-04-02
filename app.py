@@ -5,7 +5,7 @@ import pandas as pd
 import io
 import gspread
 from google.oauth2.service_account import Credentials
-from streamlit_gsheets import GSheetsConnection
+#from streamlit_gsheets import GSheetsConnection
 from datetime import datetime
 import uuid
 from core import calculate_rfm
