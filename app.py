@@ -5,7 +5,6 @@ import pandas as pd
 import io
 import gspread
 from google.oauth2.service_account import Credentials
-#from streamlit_gsheets import GSheetsConnection
 from datetime import datetime
 import uuid
 from core import calculate_rfm
@@ -364,8 +363,8 @@ if st.session_state.analysis_done:  # если переключатель в п�
             comment = st.text_area("Кратко о задаче:", height=100)
             submitted = st.form_submit_button("Заказать услугу")#🚀
     
-
-
+#============================================================
+#ТАК БЫЛО:
 @st.cache_resource
 def get_gspread_client():
     # Путь к JSON
@@ -386,6 +385,34 @@ def get_gspread_client():
 
     #@st.cache_resource
     client = get_gspread_client()
+#============================================================
+#ТАК СТАЛО:
+# @st.cache_resource
+# def get_gspread_client():
+#     # Загружаем credentials из secrets (в облаке) или из файла (локально)
+#     try:
+#         # Пробуем взять из secrets (для Streamlit Cloud)
+#         creds_dict = dict(st.secrets["gcp_service_account"])
+#         creds = Credentials.from_service_account_info(creds_dict, scopes=[
+#             "https://www.googleapis.com/auth/spreadsheets",
+#             "https://www.googleapis.com/auth/drive"
+#         ])
+#     except:
+#         # Если secrets нет — используем локальный файл (для разработки)
+#         SERVICE_ACCOUNT_FILE = "/home/dmitrii/Jupyter_Python_SQL/rfm_project/credentials.json"
+#         creds = Credentials.from_service_account_file(
+#             SERVICE_ACCOUNT_FILE,
+#             scopes=[
+#                 "https://www.googleapis.com/auth/spreadsheets",
+#                 "https://www.googleapis.com/auth/drive"
+#             ]
+#         )
+#     return gspread.authorize(creds)
+    
+#БЫЛО С ОТСТУПОМ: !!!!!!! ПРЕДЛАГАЕТ ИСПОЛЬЗОВАТЬ БЕЗ ОТСТУПА - ОШИБКА ИЛИ НЕТ????
+# Используем с отступом 
+    client = get_gspread_client()
+#============================================================
     
     if submitted:
         if email:
