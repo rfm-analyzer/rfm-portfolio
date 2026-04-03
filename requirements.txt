@@ -5,5 +5,5 @@ google-auth
 plotly
 seaborn
 matplotlib
-
+openpyxl
 
