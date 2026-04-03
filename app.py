@@ -365,49 +365,50 @@ if st.session_state.analysis_done:  # если переключатель в п�
     
 #============================================================
 #ТАК БЫЛО:
-@st.cache_resource
-def get_gspread_client():
-    # Путь к JSON
-    SERVICE_ACCOUNT_FILE = "/home/dmitrii/Jupyter_Python_SQL/rfm_project/credentials.json"
-
-# Области доступа
-    SCOPES = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
-]
-
-# Авторизация
-    creds = Credentials.from_service_account_file(
-        SERVICE_ACCOUNT_FILE,
-        scopes=SCOPES
-)
-    return gspread.authorize(creds)
-
-    #@st.cache_resource
-    client = get_gspread_client()
-#============================================================
-#ТАК СТАЛО:
 # @st.cache_resource
 # def get_gspread_client():
-#     # Загружаем credentials из secrets (в облаке) или из файла (локально)
-#     try:
-#         # Пробуем взять из secrets (для Streamlit Cloud)
-#         creds_dict = dict(st.secrets["gcp_service_account"])
-#         creds = Credentials.from_service_account_info(creds_dict, scopes=[
-#             "https://www.googleapis.com/auth/spreadsheets",
-#             "https://www.googleapis.com/auth/drive"
-#         ])
-#     except:
-#         # Если secrets нет — используем локальный файл (для разработки)
-#         SERVICE_ACCOUNT_FILE = "/home/dmitrii/Jupyter_Python_SQL/rfm_project/credentials.json"
-#         creds = Credentials.from_service_account_file(
-#             SERVICE_ACCOUNT_FILE,
-#             scopes=[
-#                 "https://www.googleapis.com/auth/spreadsheets",
-#                 "https://www.googleapis.com/auth/drive"
-#             ]
-#         )
+#     # Путь к JSON
+#     SERVICE_ACCOUNT_FILE = "/home/dmitrii/Jupyter_Python_SQL/rfm_project/credentials.json"
+
+# # Области доступа
+#     SCOPES = [
+#         "https://www.googleapis.com/auth/spreadsheets",
+#         "https://www.googleapis.com/auth/drive"
+# ]
+
+# # Авторизация
+#     creds = Credentials.from_service_account_file(
+#         SERVICE_ACCOUNT_FILE,
+#         scopes=SCOPES
+# )
 #     return gspread.authorize(creds)
+
+#     #@st.cache_resource
+#     client = get_gspread_client()
+#============================================================
+#ТАК СТАЛО:
+@st.cache_resource
+def get_gspread_client():
+    # Загружаем credentials из secrets (в облаке) или из файла (локально)
+    try:
+        # Пробуем взять из secrets (для Streamlit Cloud)
+        creds_dict = dict(st.secrets["gcp_service_account"])
+        creds = Credentials.from_service_account_info(creds_dict, scopes=[
+            "https://www.googleapis.com/auth/spreadsheets",
+            "https://www.googleapis.com/auth/drive"
+        ])
+    except:
+#    except Exception:  # советуют этот вариант
+        # Если secrets нет — используем локальный файл (для разработки)
+        SERVICE_ACCOUNT_FILE = "/home/dmitrii/Jupyter_Python_SQL/rfm_project/credentials.json"
+        creds = Credentials.from_service_account_file(
+            SERVICE_ACCOUNT_FILE,
+            scopes=[
+                "https://www.googleapis.com/auth/spreadsheets",
+                "https://www.googleapis.com/auth/drive"
+            ]
+        )
+    return gspread.authorize(creds)
     
 #БЫЛО С ОТСТУПОМ: !!!!!!! ПРЕДЛАГАЕТ ИСПОЛЬЗОВАТЬ БЕЗ ОТСТУПА - ОШИБКА ИЛИ НЕТ????
 # Используем с отступом 
