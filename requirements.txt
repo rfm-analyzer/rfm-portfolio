@@ -6,4 +6,4 @@ plotly
 seaborn
 matplotlib
 openpyxl
-
+xlsxwriter
