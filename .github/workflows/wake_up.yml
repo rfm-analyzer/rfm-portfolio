@@ -4,7 +4,7 @@ name: Wake Up App
 on:
   schedule:
     # Каждые 30 минут (в UTC)
-    - cron: '0 */30 * * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:  # возможность запуска вручную из интерфейса GitHub
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Send HTTP request to Streamlit app
         run: |
-          curl -I https://rfm-portfolio-d8n9iseq4eujggglvwd5my.streamlit.app
+          curl -I https://rfm-portfolio.streamlit.app
         # Если URL секретный, нужно указать:
         # curl -I -s -o /dev/null -w "HTTP Status: %{http_code}\nTime: %{time_total}s\n" \
         # "${{ secrets.APP_URL }}"
