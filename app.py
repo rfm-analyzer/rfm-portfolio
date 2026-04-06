@@ -83,8 +83,13 @@ uploaded_file = st.file_uploader("Загрузите ваши данные", typ
 
 #------------------Логика выбора--------------------
 if st.session_state.demo_mode:
-    df = pd.read_excel("data/abc_xyz_analisis_table.xlsx")
-    st.success("Загружен демонстрационный датасет")  
+    try:
+        df = pd.read_excel("data/abc_xyz_analisis_table.xlsx")
+        st.success("Загружен демонстрационный датасет")  
+    except:
+        df = pd.read_excel("/home/dmitrii/Jupyter_Python_SQL/rfm_project/data/abc_xyz_analisis_table.xlsx")
+        st.success("Загружен демонстрационный датасет") 
+        
     
 elif uploaded_file is not None:
     df = load_data(uploaded_file)

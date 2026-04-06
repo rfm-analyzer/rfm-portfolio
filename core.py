@@ -3,9 +3,9 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
-import plotly.express as px
-import matplotlib.pyplot as plt
-import seaborn as sns
+#import plotly.express as px
+#import matplotlib.pyplot as plt
+#import seaborn as sns
 
 
 # Переводим RFM в маркетинговый сегмент
