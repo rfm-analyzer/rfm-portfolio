@@ -1,29 +1,25 @@
-# 2. reports.py (только таблицы)
+# reports.py (tables only)
 
-# Финальный отчет для рассылки по email с указанием ID клиента
+# Final report for email distribution with customer ID
 def final_report_to_email(rfm):
-    return  rfm[['customer_id', 'Segment', 'monetary', 'frequency']]
-    
-    
-    
+    return rfm[['customer_id', 'Segment', 'monetary', 'frequency']]
 
 
-#  Финальный отчет для отдела маркетинга 
+# Final report for marketing department
 def final_report_to_marketing(rfm):
-     return (
-         rfm.groupby('Segment')
+    return (
+        rfm.groupby('Segment')
             .agg(
                 customers=('Segment', 'count'),
                 revenue=('monetary', 'sum'),
                 avg_check=('monetary', 'mean'),
                 avg_freq=('frequency', 'mean')
-        )
-        .sort_values('revenue', ascending=False)
+            )
+            .sort_values('revenue', ascending=False)
     )
-   
-    
 
-# Сводная таблица для Тепловой катры
+
+# Pivot table for Heatmap
 def build_rfm_pivot(rfm):
     return rfm.pivot_table(
         index='Recency',
@@ -32,4 +28,3 @@ def build_rfm_pivot(rfm):
         aggfunc='sum',
         observed=False
     )
-    
