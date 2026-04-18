@@ -1,19 +1,20 @@
-# 5. .github/workflows/wake_up.yml (будим каждые 30 минут)
 name: Wake Up App
 
 on:
   schedule:
-    # Каждые 30 минут (в UTC)
-    - cron: '*/20 * * * *'
-  workflow_dispatch:  # возможность запуска вручную из интерфейса GitHub
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
 
 jobs:
   ping_app:
     runs-on: ubuntu-latest
     steps:
-      - name: Send HTTP request to Streamlit app
+      - name: Wake up Streamlit app (direct URL, bypass Cloudflare)
         run: |
-          curl -I https://rfm-portfolio.streamlit.app
-        # Если URL секретный, нужно указать:
-        # curl -I -s -o /dev/null -w "HTTP Status: %{http_code}\nTime: %{time_total}s\n" \
-        # "${{ secrets.APP_URL }}"
+          # Пингуем напрямую Streamlit, минуя Cloudflare
+          curl -s -L \
+            -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
+            -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" \
+            -o /dev/null \
+            -w "HTTP: %{http_code}, Time: %{time_total}s, URL: %{url_effective}\n" \
+            https://rfm-portfolio-d8n9iseq4eujggglvwd5my.streamlit.app
