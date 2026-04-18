@@ -19,7 +19,7 @@ from plots import plot_segment_donut, plot_heatmap
 
 # Page configuration
 st.set_page_config(
-    page_title="RFM Analyser", 
+    page_title="RFM Analyzer", 
     page_icon="📊", 
     layout="wide"
 )
